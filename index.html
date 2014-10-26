@@ -1,0 +1,76 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1, IE=9">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="HandheldFriendly" content="true" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="HandheldFriendly" content="true" />
+    <meta name="robots" content="noindex,nofollow" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="apple-mobile-web-app-title" content="Phaser App">
+    <meta name="viewport" content="initial-scale=1 maximum-scale=1 user-scalable=0" />
+    <script src="lib/phaser.js"></script>
+</head>
+<body>
+    <div id="content"></div>
+    <script type="text/javascript">
+      (function () {
+      	var game = new Phaser.Game(800, 600, Phaser.CANVAS, 'content', {preoload: preload, create: create });
+        var style = { font: "65px Arial", fill: "#ff0044", align: "center" };   
+
+        function preload() {
+          game.load.image("button", "fullscreen.png");
+        }
+
+        function create () {
+          
+          game.add.button(game.world.width-64, 0, 'button', startFullScreen, this);
+          game.add.button(game.world.width-64, 64, 'button2', stopFullScreen, this);
+          game.add.button(0, 64, 'button3', showString, this);
+
+          showString();
+
+        }
+
+        function showString () {
+          var x = 50;
+          var y = 100;
+          var offset = 50;
+          var lines = ['HOLA', 'VALENTIN', 'MAMA', 'PAPA'];
+          var index = game.rnd.integerInRange(0, lines.length-1);
+
+          for (var i = 0; i < lines[index].length; i++) {
+            var char = lines[index][i];
+            var coord = { x: x += offset, y: y };
+            addLetter(char, coord.x, coord.y, lines[index].length * 50);
+          };
+        }
+
+        function stopFullScreen () {
+          game.scale.stopFullScreen();
+        }
+
+        function startFullScreen () {
+          game.scale.startFullScreen();
+        }
+
+        function addLetter (char, x, y, maxWidth) {
+          var text = game.add.text(x, y, char, style);
+
+          text.inputEnabled = true;
+          text.input.enableDrag(true);
+
+          var rndX = game.rnd.integerInRange(50, game.world.width-50);
+          var rndY = game.rnd.integerInRange(50, game.world.height-50);
+          var tween = game.add.tween(text).to( { y: rndY, x: rndX }, 2000, Phaser.Easing.Bounce.Out, true, 500);
+        }
+
+      })();
+    </script>
+</body>
+</html>
