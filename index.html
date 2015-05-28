@@ -14,7 +14,7 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black" />
     <meta name="apple-mobile-web-app-title" content="Phaser App">
     <meta name="viewport" content="initial-scale=1 maximum-scale=1 user-scalable=0" />
-    <script src="lib/phaser.js"></script>
+    <script src="bower_components/phaser/build/phaser.js"></script>
 </head>
 <body>
     <div id="content"></div>
@@ -24,14 +24,14 @@
         var style = { font: "65px Arial", fill: "#ff0044", align: "center" };   
 
         function preload() {
-          game.load.image("button", "fullscreen.png");
+          //game.load.image("button", "fullscreen.png");
         }
 
         function create () {
           
-          game.add.button(game.world.width-64, 0, 'button', startFullScreen, this);
-          game.add.button(game.world.width-64, 64, 'button2', stopFullScreen, this);
-          game.add.button(0, 64, 'button3', showString, this);
+          //game.add.button(game.world.width-64, 0, 'button', startFullScreen, this);
+          //game.add.button(game.world.width-64, 64, 'button2', stopFullScreen, this);
+          //game.add.button(0, 64, 'button3', showString, this);
 
           showString();
 
@@ -43,7 +43,7 @@
           var offset = 50;
           var lines = ['HOLA', 'VALENTIN', 'MAMA', 'PAPA'];
           var index = game.rnd.integerInRange(0, lines.length-1);
-
+          
           for (var i = 0; i < lines[index].length; i++) {
             var char = lines[index][i];
             var coord = { x: x += offset, y: y };
@@ -51,7 +51,7 @@
           };
         }
 
-        function stopFullScreen () {
+/*        function stopFullScreen () {
           game.scale.stopFullScreen();
         }
 
@@ -59,15 +59,15 @@
           game.scale.startFullScreen();
         }
 
-        function addLetter (char, x, y, maxWidth) {
-          var text = game.add.text(x, y, char, style);
+*/        function addLetter (char, x, y, maxWidth) {
+            var text = game.add.text(x, y, char, style);
 
-          text.inputEnabled = true;
-          text.input.enableDrag(true);
+            text.inputEnabled = true;
+            text.input.enableDrag(true);
 
-          var rndX = game.rnd.integerInRange(50, game.world.width-50);
-          var rndY = game.rnd.integerInRange(50, game.world.height-50);
-          var tween = game.add.tween(text).to( { y: rndY, x: rndX }, 2000, Phaser.Easing.Bounce.Out, true, 500);
+            var rndX = game.rnd.integerInRange(50, game.world.width-50);
+            var rndY = game.rnd.integerInRange(50, game.world.height-50);
+            var tween = game.add.tween(text).to( { y: rndY, x: rndX }, 2000, Phaser.Easing.Bounce.Out, true, 500);
         }
 
       })();
