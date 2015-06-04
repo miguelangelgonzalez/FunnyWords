@@ -1,10 +1,17 @@
 # FunnyWords
+**FunnyWords** is a simple matching words game for kids that it attempt to teach and  entertain at the same time. 
 
-Installing globally
--
-* nodejs
-* npm install http-server -g
+### Documentation and resources
 
-Run
--
-script StartServer.bat
+###Install packages via npm
+```
+PM> npm install http-server -g
+PM> npm install bower -g
+```
+###Run
+```
+PM> bower install
+PM> script StartServer.bat
+```
+
+
